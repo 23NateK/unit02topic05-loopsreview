@@ -1,5 +1,4 @@
 import java.util.Arrays;
-
 public class Main {
   public static String formGradeString(int[] arr){
     String grades="";
@@ -41,14 +40,42 @@ public static int[] longestPlateau(int[] nums){
   }
   return longest;
 }
+
+public static void birthdayProblem(){
+int[] bdays = new int[0];
+  boolean match=false;
+  int people=0;
+  while(!match){
+    double newbday=(Math.random()*365);
+    System.out.println(newbday);
+    newbday=Math.round(newbday);
+    int[] copyList = new int[bdays.length+1];
+    for(int x = 0; x< bdays.length; x++){
+      copyList[x] = bdays[x];
+    }
+    copyList[copyList.length-1] = (int) newbday;
+    bdays = copyList;
+    people++;
+    Arrays.sort(bdays);
+    for(int n=1;n<bdays.length;n++){
+      if(bdays[n-1]==bdays[n]){
+        match=true;
+      }
+    }
+  }
+  System.out.println("It took "+people+" people to have a pair of matching bdays.");
+}
   public static void main(String[] args) {
-    //int[] checker={62, 79, 99, 50};
-    //System.out.println(formGradeString(checker));
-    //  String[] name={"emily", "albert", "sophie", "phillip", "ophelia"};
-    //  Double[] gpas={0.223, 3.538, 3.237, 1.437, 1.162};
-    //  System.out.println(valedictorianName(name, gpas));
-    int[] num={0, 1, 1, 1, 1, 0, 3, 3, 2, 2};
-    System.out.println(Arrays.toString(longestPlateau(num)));
+    //int[] nums={62, 79, 99, 50};
+    //System.out.println(formGradeString(nums));
+
+    //String[] name={"emily", "albert", "sophie", "phillip", "ophelia"};
+    //Double[] gpas={0.223, 3.538, 3.237, 1.437, 1.162};
+    //System.out.println(valedictorianName(name, gpas));
+
+    //int[] num={0, 1, 1, 1, 1, 0, 3, 3, 2, 2};
+    //System.out.println(Arrays.toString(longestPlateau(num)));
     
+    birthdayProblem();
   }
 }
