@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
   public static String formGradeString(int[] arr){
     String grades="";
@@ -27,12 +29,26 @@ double max=gpa[0];
   }
   return winner;
 }
+public static int[] longestPlateau(int[] nums){
+  int[] longest={0,0};
+  for(int n=3;n<nums.length;n++){
+    if(nums[n-1]==nums[n-2]&&nums[n]!=nums[n-3]&&longest[0]<3&&nums[n-2]>nums[n-3]&&nums[n-1]>=nums[n]){
+      longest[0]=2;
+      longest[1]=n-2;
+    }else if(nums[n-1]==nums[n-2]&&nums[n-1]==nums[n-3]){
+      longest[0]++;
+    }
+  }
+  return longest;
+}
   public static void main(String[] args) {
     //int[] checker={62, 79, 99, 50};
     //System.out.println(formGradeString(checker));
-    String[] name={"emily", "albert", "sophie", "phillip", "ophelia"};
-    Double[] gpas={0.223, 3.538, 3.237, 1.437, 1.162};
-    System.out.println(valedictorianName(name, gpas));
+    //  String[] name={"emily", "albert", "sophie", "phillip", "ophelia"};
+    //  Double[] gpas={0.223, 3.538, 3.237, 1.437, 1.162};
+    //  System.out.println(valedictorianName(name, gpas));
+    int[] num={0, 1, 1, 1, 1, 0, 3, 3, 2, 2};
+    System.out.println(Arrays.toString(longestPlateau(num)));
     
   }
 }
