@@ -41,29 +41,39 @@ public static int[] longestPlateau(int[] nums){
   return longest;
 }
 
-public static void birthdayProblem(){
-int[] bdays = new int[0];
-  boolean match=false;
-  int people=0;
-  while(!match){
-    double newbday=(Math.random()*365);
-    System.out.println(newbday);
-    newbday=Math.round(newbday);
-    int[] copyList = new int[bdays.length+1];
-    for(int x = 0; x< bdays.length; x++){
-      copyList[x] = bdays[x];
-    }
-    copyList[copyList.length-1] = (int) newbday;
-    bdays = copyList;
-    people++;
-    Arrays.sort(bdays);
-    for(int n=1;n<bdays.length;n++){
-      if(bdays[n-1]==bdays[n]){
-        match=true;
+public static void birthdayProblem(int trys){
+  int[] peoplenum= new int[trys];
+  int trial=0;
+  for(int f=0;f<trys;f++){
+    int[] bdays = new int[0];
+    boolean match=false;
+    int people=0;
+    while(!match){
+      double newbday=(Math.random()*365);
+      newbday=Math.round(newbday);
+      int[] copyList = new int[bdays.length+1];
+      for(int x = 0; x< bdays.length; x++){
+        copyList[x] = bdays[x];
+      }
+      copyList[copyList.length-1] = (int) newbday;
+      bdays = copyList;
+      people++;
+      Arrays.sort(bdays);
+      for(int n=1;n<bdays.length;n++){
+        if(bdays[n-1]==bdays[n]){
+          peoplenum[trial]=people;
+          trial++;
+          match=true;
+        }
       }
     }
   }
-  System.out.println("It took "+people+" people to have a pair of matching bdays.");
+  double sum=0;
+  for(int h=0;h<peoplenum.length;h++){
+    sum+=peoplenum[h];
+  }
+  sum=sum/peoplenum.length;
+  System.out.println("It took an average of "+sum+" people to get 2 of the same B-Day.");
 }
   public static void main(String[] args) {
     //int[] nums={62, 79, 99, 50};
@@ -76,6 +86,10 @@ int[] bdays = new int[0];
     //int[] num={0, 1, 1, 1, 1, 0, 3, 3, 2, 2};
     //System.out.println(Arrays.toString(longestPlateau(num)));
     
-    birthdayProblem();
+    birthdayProblem(1000000);
+    //around 24.6 people on average after millions of trials
+    //I saw a video a while ago that said out of 23 people there is a 50% chance that 2 share a Birthday.
+    //https://www.youtube.com/watch?v=ofTb57aZHZs
+    //24.6 makes sense
   }
 }
